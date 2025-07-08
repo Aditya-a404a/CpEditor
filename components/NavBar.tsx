@@ -97,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={clsx(
                     "flex ",
                     isActive
-                      ? "bg-neutral-800 text-white border-gray-700"
+                      ? "bg-neutral-800 text-white border-violet-700 border-1 "
                       : "bg-neutral-900 text-gray-400 hover:bg-gray-800 border-gray-800"
                   )}
                   asChild
@@ -129,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   +
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 bg-gray-800 border border-gray-700 text-gray-100">
+              <PopoverContent className="w-80 bg-neutral-900 border border-gray-600 text-gray-100">
                 <div className="grid gap-4">
                   <div className="space-y-2">
                     <h4 className="font-medium text-gray-100">New File</h4>
@@ -146,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         id="Name"
                         value={fileName}
                         onChange={(e) => setFileName(e.target.value)}
-                        className="col-span-2 h-8 bg-gray-700 text-white border-gray-600"
+                        className="col-span-2 h-8 bg-neutral-800 text-white border-gray-600"
                       />
                     </div>
                     <div className="grid grid-cols-3 items-center gap-4">
@@ -154,12 +154,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                         Language
                       </Label>
                       <Select onValueChange={setSelected} value={selected}>
-                        <SelectTrigger className="col-span-2 h-8 bg-gray-700 text-white border-gray-600">
+                        <SelectTrigger className="col-span-2 h-8 bg-neutral-800 text-white border-gray-600">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-800 text-white border border-gray-700">
+                        <SelectContent className="bg-neutral-800 text-white border border-gray-600">
                           {languages.map((lang) => (
-                            <SelectItem key={lang.value} value={lang.value}>
+                            <SelectItem  key={lang.value} value={lang.value}>
                               <div className="flex items-center gap-2">
                                 <Image
                                   src={lang.icon}
@@ -175,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </Select>
                     </div>
                     <Button
-                      className="mt-4 bg-gray-700 hover:bg-gray-600 text-white"
+                      className="mt-4 bg-violet-700 hover:bg-violet-900 text-white"
                       onClick={handleSubmit}
                     >
                       Create Tab
