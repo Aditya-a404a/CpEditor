@@ -45,7 +45,7 @@ export default function Home() {
   const runCode = async () => {
     if (!currentTab) return;
     setOutput("Compling")
-    const response = await fetch("http://localhost:3000/api/run", {
+    const response = await fetch("/api/run", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
