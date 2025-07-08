@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
             content: code,
           },
         ],
+        // stdin: "Hello from stdin!",
         run_timeout: 3000,
         compile_timeout: 10000,
       }),

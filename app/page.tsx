@@ -133,7 +133,7 @@ export default function Home() {
         </div>
 
         {/* Bottom Panel */}
-        <div className="bg-black text-white p-4 overflow-auto">
+        <div className="bg-black text-white  border-t-1 border-neutral-800 p-4 overflow-auto">
           { output }
         </div>
       </Split>
