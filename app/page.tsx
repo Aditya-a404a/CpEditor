@@ -16,7 +16,7 @@ export default function Home() {
   
   const [tabs,setTabs] = useState<ResizableEditorProps[]>([]);
   const [currentTabId, setcurrentId] = useState<Number|null>(null);
-  const [output,setOutput] = useState<String>("No Complier Selected");
+  const [output,setOutput] = useState<String>("No Compiler Selected");
 
   const handleTabs = (data : ResizableEditorProps) =>
   {
@@ -92,7 +92,7 @@ export default function Home() {
       {/* Sidebar */}
       <CardSpotlight className="rounded-none" >
       <p className="text-xl font-bold relative z-20 mt-2 text-white">
-        Authentication steps
+        CODE REVIEW WILL BE ADDED 
       </p>
       </CardSpotlight>
 
@@ -108,7 +108,7 @@ export default function Home() {
         <div className="relative h-full w-full bg-gray-950 border-t-1 border-r-1 border-neutral-800">
           {!currentTab && (
             <div className="text-white bg-black p-4 min-h-full overflow-auto">
-              Open a file to get started.
+              CREATE A FILE USING THE TAB 
             </div>
           )}
 
