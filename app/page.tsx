@@ -45,21 +45,22 @@ export default function Home() {
   const runCode = async () => {
     if (!currentTab) return;
     setOutput("Compling")
-    const response = await fetch("/api/run", {
+    const response = await fetch("api/run", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         language: currentTab.language, // e.g., 'python'
-        code: currentTab.code          // e.g., 'print("Hello")'
+        code: currentTab.code,
+        input : "",       // e.g., 'print("Hello")'
       }),
     });
   
     const result = await response.json();
-    console.log("Execution Output:", result.stdout);
+    console.log("Execution Output:", result.output);
     
-    setOutput(result.stdout);
+    setOutput(result.output + "Execution Time\n " + result.execution_time +"\n"+result.error);
     console.log(result)
     // Optionally show this in your UI
   };
