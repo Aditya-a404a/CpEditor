@@ -7,7 +7,8 @@ import { ResizableEditorProps } from "../components/ResizableEditor";
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Boxes } from "@/components/ui/background-boxes";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
-import { Button } from "@/components/ui/button";
+
+import { Button } from "@/components/ui/stateful-button";
 const ResizableEditor = dynamic(() => import('../components/ResizableEditor'), {
   ssr: true,
 });
@@ -123,12 +124,10 @@ export default function Home() {
                 id={currentTab.id}
               />
 
-              <Button className="absolute bottom-4 right-4 bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded shadow-lg z-10"
+              <Button className="absolute bottom-4 right-4 z-10"
                 onClick={runCode}>
               Run
               </Button>
-
-  
             </>
           )}
         </div>
