@@ -7,6 +7,7 @@ import { ResizableEditorProps } from "../components/ResizableEditor";
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Boxes } from "@/components/ui/background-boxes";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { Vortex } from "@/components/ui/vortex";
 
 import { Button } from "@/components/ui/stateful-button";
 const ResizableEditor = dynamic(() => import('../components/ResizableEditor'), {
@@ -108,12 +109,23 @@ export default function Home() {
       >
         {/* Editor Area */}
         <div className="relative h-full w-full bg-gray-950 border-t-1 border-r-1 border-neutral-800">
-          {!currentTab && (
-            <div className="text-white bg-black p-4 min-h-full overflow-auto">
-              CREATE A FILE USING THE TAB 
-            </div>
-          )}
-
+        {!currentTab && (
+  <div className="w-full h-full overflow-hidden m-0 p-0">
+    <Vortex
+      backgroundColor="black"
+      className="w-full h-full flex items-center justify-center flex-col m-0 p-0"
+    >
+      <h2 className="text-white text-2xl md:text-6xl font-bold text-center m-0">
+        The hell is this?
+      </h2>
+      <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center m-0">
+        This is Competitive Programming. It&apos;ll hurt more than you&apos;ve ever been
+        burned and you&apos;ll have a scar.
+      </p>
+      
+    </Vortex>
+  </div>
+)}
           {currentTab && (
             <>
               <ResizableEditor

@@ -122,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <PopoverTrigger asChild>
         <button className="group relative inline-flex h-10 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#4b5563_50%,#ffffff_100%)]" />
-        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-neutral-800 px-3  text-sm font-medium text-white backdrop-blur-3xl">
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-black px-3  text-sm font-medium text-white backdrop-blur-3xl">
           +
         </span>
       </button>
@@ -175,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </Select>
               </div>
               <Button
-                className="mt-4 bg-violet-700 border-2 border-neutral-600 hover:bg-violet-900 text-white"
+                className="mt-4 bg-white border-2 border-neutral-800 hover:bg-white text-black"
                 onClick={handleSubmit}
               >
                 Create Tab
@@ -187,12 +187,77 @@ export const Navbar: React.FC<NavbarProps> = ({
     </div>
 
     {/* Right: Input or Status */}
-    <div className="text-white">
+    <div className="text-white flex gap-2">
     <Popover>
         <PopoverTrigger asChild>
         <button className="group relative inline-flex h-10 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#4b5563_50%,#ffffff_100%)]" />
-        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-neutral-800 px-3  text-sm font-medium text-white backdrop-blur-3xl">
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-black px-3  text-sm font-medium text-white backdrop-blur-3xl">
+          Notes
+        </span>
+      </button>
+        </PopoverTrigger>
+        <PopoverContent className="w-96 bg-neutral-900 border border-neutral-800 text-gray-100">
+  <div className="grid gap-4">
+    <div className="space-y-2">
+      <h4 className="font-medium text-gray-100">Add Description</h4>
+      <p className="text-sm text-gray-400">
+        Enter detailed information or notes
+      </p>
+    </div>
+    <div className="grid gap-2">
+      <textarea
+        value=""
+        onChange={(e) => {}}
+        rows={6}
+        className="w-full rounded-md bg-neutral-800 text-white border border-neutral-800 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-white-500 text-sm"
+        placeholder="Start typing..."
+      />
+      
+    </div>
+  </div>
+</PopoverContent>
+      </Popover>
+    <Popover>
+        <PopoverTrigger asChild>
+        <button className="group relative inline-flex h-10 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#4b5563_50%,#ffffff_100%)]" />
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-black px-3  text-sm font-medium text-white backdrop-blur-3xl">
+          AI
+        </span>
+      </button>
+        </PopoverTrigger>
+        <PopoverContent className="w-96 bg-neutral-900 border border-neutral-800 text-gray-100">
+  <div className="grid gap-4">
+    <div className="space-y-2">
+      <h4 className="font-medium text-gray-100">Add Description</h4>
+      <p className="text-sm text-gray-400">
+        Enter detailed information or notes
+      </p>
+    </div>
+    <div className="grid gap-2">
+      <textarea
+        value=""
+        onChange={(e) => {}}
+        rows={6}
+        className="w-full rounded-md bg-neutral-800 text-white border border-neutral-800 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-white-500 text-sm"
+        placeholder="Start typing..."
+      />
+      <Button
+        className="mt-4 bg-white hover:bg-gray-100 text-black"
+        onClick={handleSubmit}
+      >
+        Submit
+      </Button>
+    </div>
+  </div>
+</PopoverContent>
+      </Popover>
+    <Popover>
+        <PopoverTrigger asChild>
+        <button className="group relative inline-flex h-10 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ffffff_0%,#4b5563_50%,#ffffff_100%)]" />
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-black px-3  text-sm font-medium text-white backdrop-blur-3xl">
           Input
         </span>
       </button>
@@ -210,11 +275,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         value=""
         onChange={(e) => {}}
         rows={6}
-        className="w-full rounded-md bg-neutral-800 text-white border border-gray-600 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
+        className="w-full rounded-md bg-neutral-800 text-white border border-gray-600 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-white text-sm"
         placeholder="Start typing..."
       />
       <Button
-        className="mt-4 bg-violet-700 hover:bg-violet-900 text-white"
+        className="mt-4 bg-white hover:bg-white text-black"
         onClick={handleSubmit}
       >
         Submit
@@ -226,7 +291,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       </Popover>
     </div>
-    
   </div>
 </CardSpotlight>
   
