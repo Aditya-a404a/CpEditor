@@ -103,7 +103,7 @@ export default function Home() {
     {/* Sidebar + Main Area Split */}
     <Split
       className="flex flex-row w-full h-full"
-      sizes={[25, 75]} // Sidebar 20%, Main area 80%
+      sizes={[30, 70]} // Sidebar 20%, Main area 80%
       minSize={100}
       direction="horizontal"
       gutterSize={3}

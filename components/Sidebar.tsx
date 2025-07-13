@@ -3,7 +3,7 @@ import { CardStack } from "./ui/card-stack";
 import { cn } from "@/lib/utils";
 export function Sidebar() {
   return (
-    <div className="h-[50rem] flex items-center justify-center w-full">
+    <div className="h-[40rem] flex items-center justify-center w-full">
       <CardStack items={CARDS} />
     </div>
   );
