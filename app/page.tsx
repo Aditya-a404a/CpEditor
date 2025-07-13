@@ -9,7 +9,7 @@ import { Boxes } from "@/components/ui/background-boxes";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { Vortex } from "@/components/ui/vortex";
 import { LinkPreview } from "@/components/ui/link-preview";
-
+import { toast } from "sonner";
 import { Button } from "@/components/ui/stateful-button";
 import { extractIdentifiersWithCounts } from "@/lib/extractIdentifiersWithCounts";
 import { Identifiers } from "@/components/Identifier";
@@ -25,7 +25,29 @@ export default function Home() {
   const [currentTabId, setcurrentId] = useState<Number|null>(null);
   const [output,setOutput] = useState<String>("");
   const [keyThings,setKeyThings] = useState<Record<string, number>>({})
-
+  const handleCloseTab = (data : ResizableEditorProps) =>
+  {
+    setTabs((prevTabs : ResizableEditorProps[]) =>
+    {
+      const temp = [ ]
+      for( let i = 0 ; i<prevTabs.length;i++)
+      {
+        if (prevTabs[i].id!=data.id)
+        {
+          temp.push(prevTabs[i])
+        }
+      }
+      if (temp.length > 0)
+      {
+    setcurrentId(temp[0].id);
+      }
+      else{
+        setcurrentId(null) 
+      }
+      setOutput("");
+      return temp
+    })
+  }
 
   const handleTabs = (data : ResizableEditorProps) =>
   {
@@ -63,7 +85,7 @@ export default function Home() {
   };
   const runCode = async () => {
     if (!currentTab) return;
-    setOutput("Compling")
+    setOutput("Compiling")
     const response = await fetch("api/run", {
       method: "POST",
       headers: {
@@ -98,7 +120,7 @@ export default function Home() {
   
   return (
     <div className="overflow-hidden h-screen w-screen">
-  <Navbar handleTabs={handleTabs} currentTabId={currentTabId} tabs={tabs} handleNewTab={handleNewTab} />
+  <Navbar handleTabs={handleTabs} handleCloseTab={handleCloseTab} currentTabId={currentTabId} tabs={tabs} handleNewTab={handleNewTab} />
 
   <div className="h-screen w-screen flex flex-row">
     {/* Sidebar + Main Area Split */}
@@ -175,8 +197,8 @@ export default function Home() {
         {/* Bottom Panel */}
         <div className="bg-black text-white  border-t-1 border-neutral-800 p-4 overflow-auto">
         <h2 className="  mx-auto text-l md:text-3xl font-bold text-white  font-sans">
-       { output=="" && <div className="text-neutral-500 dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto mb-10">
-        Contribute {" "} <LinkPreview url="https://github.com/Aditya-a404a/Aditya-a404a/blob/main/README.md" className="font-bold text-white">
+       { output=="" && <div className="text-white text-xl md:text-3xl max-w-3xl mx-auto mb-10">
+        Contribute {" "} <LinkPreview url="https://github.com/Aditya-a404a/Aditya-a404a/blob/main/README.md" className="font-bold bg-white text-black">
           Here
         </LinkPreview>{" "}to make this even better
         {" "} 

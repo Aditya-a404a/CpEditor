@@ -20,6 +20,8 @@ import { ResizableEditorProps } from "./ResizableEditor";
 import { CardSpotlight } from "./ui/card-spotlight";
 import clsx from "clsx";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner"
+
 
 
 const languages = [
@@ -55,6 +57,7 @@ interface NavbarProps {
   currentTabId: Number | null;
   tabs: ResizableEditorProps[];
   handleNewTab: (value: any) => void;
+  handleCloseTab: ( value :ResizableEditorProps)=> void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -62,6 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   tabs,
   currentTabId,
   handleNewTab,
+  handleCloseTab
 }) => {
   const [selected, setSelected] = useState<string>("");
   const [fileName, setFileName] = useState<string>("untitled");
@@ -82,6 +86,27 @@ export const Navbar: React.FC<NavbarProps> = ({
     });
     setFileName("untitled");
     setSelected("");
+    toast("New file created", {
+      description: ""
+    })
+    
+  };
+  const handleCopyClick = () => {
+    let code =  null
+    for (let i  = 0 ;i<tabs.length;i++)
+    {
+      if (tabs[i].id==currentTabId)
+      {
+        code = tabs[i].code
+      }
+    }
+    if (code)
+    {
+    navigator.clipboard.writeText(code).then(() => {
+      toast("Code is copied to clipboard", {
+        description: ""
+      })
+    })};
   };
 
   return (
@@ -90,32 +115,51 @@ export const Navbar: React.FC<NavbarProps> = ({
   <div className="flex w-full items-center justify-between px-2 z-20 shadow-sm   border-gray-800">
     {/* Left: Tabs + "+" Button */}
     <div className="flex items-center gap-2">
-      {tabs.map((data: ResizableEditorProps, id: number) => {
-        const lang = languages.find((l) => l.value === data.language);
-        const isActive = data.id === currentTabId;
+  {tabs.map((data: ResizableEditorProps, id: number) => {
+    const lang = languages.find((l) => l.value === data.language);
+    const isActive = data.id === currentTabId;
 
-        return (
-          <button
+    return (
+      <button
+        className={cn(
+          "px-4 py-2  flex rounded-sm relative z-20 text-white text-sm transition duration-200 border border-white hover:shadow-2xl hover:shadow-white/[0.1] group", 
+          isActive ? "bg-black" : "bg-neutral-800"
+        )}
+        onClick={() => handleTabs(data)}
+        key={id}
+      >
+        <div 
           className={cn(
-            "px-4 py-2 rounded-sm relative z-20 text-white text-sm transition duration-200 border border-white hover:shadow-2xl hover:shadow-white/[0.1]",isActive ? "bg-black" : "bg-neutral-800"
+            "absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r", 
+            isActive ? "bg-gradient-to-r from-transparent via-violet-600 to-transparent" : ""
           )}
-          onClick={() => handleTabs(data)}
-          key={id}
+        />
+        
+        <span className="relative z-20 flex text-white">
+          {data.title}
+          {lang?.icon && (
+            <Image
+              src={lang.icon}
+              alt={lang.label}
+              width={14}
+              height={14}
+              className="ml-2"
+            />
+          )}
+        </span>
+
+        {/* X Button */}
+        <span 
+          className="ml-1 rounded-md  text-white font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-200"
+          onClick={(e) => { e.stopPropagation(); handleCloseTab(data); toast("File Deleted", {
+            description: ""
+          }) }} // Handle tab close
         >
-        <div className={cn("absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r", isActive ? "bg-gradient-to-r from-transparent via-violet-600 to-transparent" : "") }/>
-        <span className="relative z-20 flex">{data.title}
-            {lang?.icon && (
-              <Image
-                src={lang.icon}
-                alt={lang.label}
-                width={14}
-                height={14}
-                className="ml-2"
-              />
-            )}</span>
-          </button>
-        );
-      })}
+          X
+        </span>
+      </button>
+    );
+  })}
 
       {/* + Button */}
       <Popover>
@@ -187,7 +231,14 @@ export const Navbar: React.FC<NavbarProps> = ({
     </div>
 
     {/* Right: Input or Status */}
-    <div className="text-white flex gap-2">
+    {currentTabId &&
+    <div className="text-white flex gap-2 align-middle">
+    <button  onClick={handleCopyClick}className="group relative inline-flex h-10 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+        <span className="" />
+        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-md bg-neutral-800 px-3  text-sm font-medium text-white backdrop-blur-3xl">
+         Ctrl+C
+        </span>
+      </button>
     <Popover>
         <PopoverTrigger asChild>
         <button className="group relative inline-flex h-10 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
@@ -272,8 +323,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
 
       </Popover>
-    </div>
-  </div>
+  </div>}
+  </div> 
 </CardSpotlight>
   
   );
