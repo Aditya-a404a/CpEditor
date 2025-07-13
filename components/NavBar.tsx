@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [selected, setSelected] = useState<string>("");
   const [fileName, setFileName] = useState<string>("untitled");
-
+  const [notes,setNotes] = useState<string>("");
   const selectedLang = languages.find((l) => l.value === selected);
 
   const handleSubmit = () => {
@@ -200,15 +200,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         <PopoverContent className="w-96 bg-neutral-900 border border-neutral-800 text-gray-100">
   <div className="grid gap-4">
     <div className="space-y-2">
-      <h4 className="font-medium text-gray-100">Add Description</h4>
-      <p className="text-sm text-gray-400">
-        Enter detailed information or notes
-      </p>
+      <h4 className="font-medium text-gray-100">Jot your thoughts here</h4>
     </div>
     <div className="grid gap-2">
       <textarea
-        value=""
-        onChange={(e) => {}}
+        value={notes}
+        onChange={(e) => {setNotes(e.target.value)}}
         rows={6}
         className="w-full rounded-md bg-neutral-800 text-white border border-neutral-800 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-white-500 text-sm"
         placeholder="Start typing..."
@@ -230,25 +227,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <PopoverContent className="w-96 bg-neutral-900 border border-neutral-800 text-gray-100">
   <div className="grid gap-4">
     <div className="space-y-2">
-      <h4 className="font-medium text-gray-100">Add Description</h4>
+      <h4 className="font-medium text-gray-100">Coming Soon</h4>
       <p className="text-sm text-gray-400">
-        Enter detailed information or notes
+      Pro Version Only 
       </p>
-    </div>
-    <div className="grid gap-2">
-      <textarea
-        value=""
-        onChange={(e) => {}}
-        rows={6}
-        className="w-full rounded-md bg-neutral-800 text-white border border-neutral-800 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-white-500 text-sm"
-        placeholder="Start typing..."
-      />
-      <Button
-        className="mt-4 bg-white hover:bg-gray-100 text-black"
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
     </div>
   </div>
 </PopoverContent>
