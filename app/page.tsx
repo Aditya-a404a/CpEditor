@@ -8,6 +8,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Boxes } from "@/components/ui/background-boxes";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { Vortex } from "@/components/ui/vortex";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 import { Button } from "@/components/ui/stateful-button";
 import { extractIdentifiersWithCounts } from "@/lib/extractIdentifiersWithCounts";
@@ -22,7 +23,7 @@ export default function Home() {
   
   const [tabs,setTabs] = useState<ResizableEditorProps[]>([]);
   const [currentTabId, setcurrentId] = useState<Number|null>(null);
-  const [output,setOutput] = useState<String>("Whatever your good (trash) code splits out will be displayed Here");
+  const [output,setOutput] = useState<String>("");
   const [keyThings,setKeyThings] = useState<Record<string, number>>({})
 
 
@@ -103,7 +104,7 @@ export default function Home() {
     {/* Sidebar + Main Area Split */}
     <Split
       className="flex flex-row w-full h-full"
-      sizes={[30, 70]} // Sidebar 20%, Main area 80%
+      sizes={[35, 65]} // Sidebar 20%, Main area 80%
       minSize={100}
       direction="horizontal"
       gutterSize={3}
@@ -174,7 +175,13 @@ export default function Home() {
         {/* Bottom Panel */}
         <div className="bg-black text-white  border-t-1 border-neutral-800 p-4 overflow-auto">
         <h2 className="  mx-auto text-l md:text-3xl font-bold text-white  font-sans">
-       {output}
+       { output=="" && <div className="text-neutral-500 dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto mb-10">
+        Contribute {" "} <LinkPreview url="https://github.com/Aditya-a404a/Aditya-a404a/blob/main/README.md" className="font-bold text-white">
+          Here
+        </LinkPreview>{" "}to make this even better
+        {" "} 
+      </div> }
+      { output }
       </h2>
         </div>
       </Split>
