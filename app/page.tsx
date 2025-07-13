@@ -10,6 +10,8 @@ import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { Vortex } from "@/components/ui/vortex";
 
 import { Button } from "@/components/ui/stateful-button";
+import { extractIdentifiersWithCounts } from "@/lib/extractIdentifiersWithCounts";
+import { Identifiers } from "@/components/Identifier";
 const ResizableEditor = dynamic(() => import('../components/ResizableEditor'), {
   ssr: true,
 });
@@ -19,11 +21,13 @@ export default function Home() {
   const [tabs,setTabs] = useState<ResizableEditorProps[]>([]);
   const [currentTabId, setcurrentId] = useState<Number|null>(null);
   const [output,setOutput] = useState<String>("No Compiler Selected");
+  const [keyThings,setKeyThings] = useState<Record<string, number>>({})
+
 
   const handleTabs = (data : ResizableEditorProps) =>
   {
     setcurrentId(data.id);
-    setOutput(" Complier Set to " + data.language)
+    setOutput(" Compiler Set to " + data.language)
     setTabs((prevTabs : ResizableEditorProps[]) =>
     {
         const exists = prevTabs.find(tab => tab.id === data.id);
@@ -42,7 +46,17 @@ export default function Home() {
       prevTabs.map(tab =>
         tab.id === currentTabId ? { ...tab, code: newCode } : tab
       )
+    
     );
+    if (currentTab)
+    {
+
+    
+    setKeyThings(()=>
+      {
+        return extractIdentifiersWithCounts(currentTab.code,currentTab?.language)
+      })
+    }
   };
   const runCode = async () => {
     if (!currentTab) return;
@@ -94,9 +108,22 @@ export default function Home() {
     >
       {/* Sidebar */}
       <CardSpotlight className="rounded-none" >
+      { 
+      Object.keys(keyThings).length <=0 && 
       <p className="text-xl font-bold relative z-20 mt-2 text-white">
         CODE REVIEW WILL BE ADDED 
       </p>
+      }
+      {Object.keys(keyThings).length > 0 &&
+       (
+    <div className=" flex-colgap-2 z-20">
+    
+    {Object.entries(keyThings).map(([identifier, count]) => (
+      <Identifiers   key={identifier} token = {identifier} count = {count}/>
+    ))}
+    </div>
+
+)}
       </CardSpotlight>
 
       {/* Main Area: Editor + Bottom Panel */}
@@ -119,8 +146,8 @@ export default function Home() {
         The hell is this?
       </h2>
       <p className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center m-0">
-        This is Competitive Programming. It&apos;ll hurt more than you&apos;ve ever been
-        burned and you&apos;ll have a scar.
+        This is CSE. It&apos;ll hurt more than you&apos;ve ever been
+        hurt and you&apos;ll have a scar.
       </p>
       
     </Vortex>
