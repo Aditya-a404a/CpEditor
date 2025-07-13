@@ -19,7 +19,7 @@ interface VortexProps {
 export const Vortex = (props: VortexProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef(null);
-  const animationFrameId = useRef<number>();
+  const animationFrameId = useRef<number|null>(null);
 
   const particleCount = props.particleCount || 700;
   const particlePropCount = 8; // Removed hue
