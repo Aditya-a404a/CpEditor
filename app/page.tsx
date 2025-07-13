@@ -12,6 +12,8 @@ import { Vortex } from "@/components/ui/vortex";
 import { Button } from "@/components/ui/stateful-button";
 import { extractIdentifiersWithCounts } from "@/lib/extractIdentifiersWithCounts";
 import { Identifiers } from "@/components/Identifier";
+
+import { Sidebar } from "@/components/Sidebar";
 const ResizableEditor = dynamic(() => import('../components/ResizableEditor'), {
   ssr: true,
 });
@@ -20,7 +22,7 @@ export default function Home() {
   
   const [tabs,setTabs] = useState<ResizableEditorProps[]>([]);
   const [currentTabId, setcurrentId] = useState<Number|null>(null);
-  const [output,setOutput] = useState<String>("No Compiler Selected");
+  const [output,setOutput] = useState<String>("Whatever your good (trash) code splits out will be displayed Here");
   const [keyThings,setKeyThings] = useState<Record<string, number>>({})
 
 
@@ -101,7 +103,7 @@ export default function Home() {
     {/* Sidebar + Main Area Split */}
     <Split
       className="flex flex-row w-full h-full"
-      sizes={[20, 80]} // Sidebar 20%, Main area 80%
+      sizes={[30, 70]} // Sidebar 20%, Main area 80%
       minSize={100}
       direction="horizontal"
       gutterSize={3}
@@ -110,9 +112,7 @@ export default function Home() {
       <CardSpotlight className="rounded-none" >
       { 
       Object.keys(keyThings).length <=0 && 
-      <p className="text-xl font-bold relative z-20 mt-2 text-white">
-        CODE REVIEW WILL BE ADDED 
-      </p>
+      <Sidebar/>
       }
       {Object.keys(keyThings).length > 0 &&
        (
@@ -173,7 +173,9 @@ export default function Home() {
 
         {/* Bottom Panel */}
         <div className="bg-black text-white  border-t-1 border-neutral-800 p-4 overflow-auto">
-          { output }
+        <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white  font-sans">
+       {output}
+      </h2>
         </div>
       </Split>
     </Split>
