@@ -31,16 +31,6 @@ export const Highlight = ({
 
 const CARDS = [
   {
-    id: 0,
-    name: "Adi Arora",
-    designation: "Engineer",
-    content: (
-      <p>
-       Want to make this even Better, Contribute Here <Highlight>I want to use them</Highlight> 🙏
-      </p>
-    ),
-  },
-  {
     id: 1,
     name: "Adi Arora",
     designation: "Engineer",
