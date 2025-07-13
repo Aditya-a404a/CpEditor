@@ -103,7 +103,7 @@ export default function Home() {
     {/* Sidebar + Main Area Split */}
     <Split
       className="flex flex-row w-full h-full"
-      sizes={[30, 70]} // Sidebar 20%, Main area 80%
+      sizes={[25, 75]} // Sidebar 20%, Main area 80%
       minSize={100}
       direction="horizontal"
       gutterSize={3}
@@ -173,7 +173,7 @@ export default function Home() {
 
         {/* Bottom Panel */}
         <div className="bg-black text-white  border-t-1 border-neutral-800 p-4 overflow-auto">
-        <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white  font-sans">
+        <h2 className="  mx-auto text-l md:text-3xl font-bold text-white  font-sans">
        {output}
       </h2>
         </div>
